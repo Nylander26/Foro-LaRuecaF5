@@ -11,11 +11,11 @@
     <h1>Registro</h1><hr>
     <form action="" method="POST">
         Usuario: <br>
-            <input type="text" name="user"><br>
+            <input type="text" name="user" required><br>
         Email: <br>
-            <input type="email" name="email"><br>
+            <input type="email" name="email" required><br>
         Clave: <br>
-            <input type="password" name="pass"><br>
+            <input type="password" name="pass" required><br>
             <input type="submit" name="reg" value="Registrar">
     </form>
 
@@ -27,15 +27,21 @@
             require("config/config.php");
             $user = $_POST["user"];
             $email = $_POST["email"];
+            $filtroEmail = filter_var($email, FILTER_SANITIZE_EMAIL);
             $pass = md5($_POST["pass"]);
 
             $consulta = $conexion->query("SELECT * FROM usuarios WHERE usuario = '$user'");
-            $consultaEmail = $conexion->query("SELECT * FROM usuarios WHERE usuario = '$email'");
+            $consultaEmail = $conexion->query("SELECT * FROM usuarios WHERE email = '$email'");
             $contar = $consulta->num_rows;
             $contarEmail = $consultaEmail->num_rows;
-            if($contar > 0 && $contarEmail > 0){
+            
+            if($contar > 0){
 
-                echo "Ya hay un usuario con ese nombre o correo, cambialo";
+                echo "Ya hay un usuario con ese nombre, cambialo";
+
+            } elseif($contarEmail > 0){
+
+                echo "Ya hay un usuario con ese correo, cambialo";
 
             } else{
 
@@ -48,6 +54,7 @@
         }
         echo "<a href='login.php'>Log In</a>";
 
+echo $contarEmail;
     ?>
 </body>
 </html>
