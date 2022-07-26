@@ -12,6 +12,8 @@
     <form action="" method="POST">
         Usuario: <br>
             <input type="text" name="user"><br>
+        Email: <br>
+            <input type="email" name="email"><br>
         Clave: <br>
             <input type="password" name="pass"><br>
             <input type="submit" name="reg" value="Registrar">
@@ -24,17 +26,20 @@
 
             require("config/config.php");
             $user = $_POST["user"];
+            $email = $_POST["email"];
             $pass = md5($_POST["pass"]);
 
             $consulta = $conexion->query("SELECT * FROM usuarios WHERE usuario = '$user'");
+            $consultaEmail = $conexion->query("SELECT * FROM usuarios WHERE usuario = '$email'");
             $contar = $consulta->num_rows;
-            if($contar > 0){
+            $contarEmail = $consultaEmail->num_rows;
+            if($contar > 0 && $contarEmail > 0){
 
-                echo "Ya hay un usuario con ese nombre, cambialo";
+                echo "Ya hay un usuario con ese nombre o correo, cambialo";
 
             } else{
 
-                $insertar = $conexion->query("INSERT INTO usuarios (usuario, clave, fecha) VALUES('$user', '$pass', now())");
+                $insertar = $conexion->query("INSERT INTO usuarios (usuario, email, clave, fecha) VALUES('$user', '$email', '$pass', now())");
     
                 if($insertar){
                     echo "Te has registrado correctamente";
