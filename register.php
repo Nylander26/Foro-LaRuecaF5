@@ -28,7 +28,7 @@
             $user = $_POST["user"];
             $email = $_POST["email"];
             $filtroEmail = filter_var($email, FILTER_SANITIZE_EMAIL);
-            $pass = md5($_POST["pass"]); //md5 se encarga de encriptar la contraseña, por ende en la BBDD apareceran numeros aleatorios
+            $pass = $_POST["pass"]; 
 
             $consulta = $conexion->query("SELECT * FROM usuarios WHERE usuario = '$user'");
             $consultaEmail = $conexion->query("SELECT * FROM usuarios WHERE email = '$email'");

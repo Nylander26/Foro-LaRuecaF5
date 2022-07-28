@@ -40,7 +40,7 @@ session_start();
 
             $share = $_POST["mensaje"];
 
-            $insertar = $conexion->query("INSERT INTO publicaciones (mensaje, usuario, fecha) VALUES ('$share', '".$_SESSION['id']."', '".now()."')");
+            $insertar = $conexion->query("INSERT INTO publicaciones (mensaje, usuario, fecha) VALUES ('$share', '".$_SESSION['id']."', NOW())");
         }
     ?>
     <br>
@@ -60,6 +60,7 @@ session_start();
             <div>
                 <div><?php echo $row["mensaje"]; ?></div>
                 <div><a href="perfil.php?id=<?php echo $row['usuario']; ?>"><?php echo $rowUser["usuario"]; ?></a></div>
+                <div><?php echo $row['fecha']; ?></div>
             </div>
             <br>
 

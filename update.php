@@ -1,3 +1,6 @@
+<!--IMPORTANTE MODIFICAR LA BBDD PARA QUE SE ACTUALICE AUTOMATICAMENTE AL MOMENTO DE ACTUALIZAR LOS DATOS YA QUE SI NO EL LOGIN NO FUNCIONARA-->
+
+
 <!--Inicio de Sesion-->
 <?php
 
@@ -34,14 +37,14 @@ if(!isset($_SESSION["usuario"])){
             <?php require("config/config.php"); ?>
 
             <form action="" method="post">
-                Nombre:<br>
-                    <input type="text" name="nameUpdate" placeholder="<?php echo $row['nombrereal'] ?>"><br>
+                Nombre y Apellido:<br>
+                    <input type="text" name="nameUpdate" value="<?php echo $row['nombrereal'] ?>"><br>
                 Nombre de Usuario:<br>
-                    <input type="text" name="userUpdate" placeholder="<?php echo $row['usuario'] ?>"><br>
+                    <input type="text" name="userUpdate" value="<?php echo $row['usuario'] ?>"><br>
                 Contraseña:<br>
-                    <input type="password" name="passUpdate"><br>
+                    <input type="password" name="passUpdate" value="<?php echo $row['clave'] ?>"><br>
                 Email:<br>
-                    <input type="email" name="emailUpdate" placeholder="<?php echo $row['email'] ?>"><br>
+                    <input type="email" name="emailUpdate" value="<?php echo $row['email'] ?>"><br>
                 <input type="submit" value="Modificar" name="update">
             </form>
             <?php } ?>
@@ -62,6 +65,8 @@ if(!isset($_SESSION["usuario"])){
 
                     if(isset($userUpdate)){
                         $rutaUsuario = $conexion->query("UPDATE usuarios SET usuario = '".$userUpdate."' WHERE id = '".$_GET['id']."'");
+                        unset($_SESSION["usuario"]);
+                        $_SESSION["usuario"] = $userUpdate;
                     } 
                     
                     if(isset($passUpdate)){
@@ -72,8 +77,9 @@ if(!isset($_SESSION["usuario"])){
                         $rutaEmail = $conexion->query("UPDATE usuarios SET email = '".$filtroEmailUpdate."' WHERE id = '".$_GET['id']."'");
                     }
                     echo "Los cambios se han realizado con exito!";
-                    header("Location: update.php?id=".$_GET["id"]."");
+                    //header("Location: update.php?id=".$_GET["id"]."");
                 }
+                //print_r($_SESSION);
             ?>
             <?php } ?>
 </body>
