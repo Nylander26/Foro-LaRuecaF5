@@ -1,6 +1,7 @@
 <!--Inicio de Sesion-->
 <?php
 session_start();
+$_SESSION['usuario'] = $_POST['usuario'];
 if(isset($_SESSION["usuario"])){
     header("Location: index.php");
 }
@@ -27,13 +28,13 @@ if(isset($_SESSION["usuario"])){
 
     <!--Formato para validar inicios de sesion recuperando el id de MySQL y redireccionando a la pagina de inicio-->
     <?php
-
+    
     if(isset($_POST["login"])){
 
         require ("config/config.php");
 
         $user = $_POST["user"];
-        $pass = md5($_POST["pass"]);
+        $pass = md5($_POST["pass"]); //md5 se encarga de encriptar la contraseña, por ende en la BBDD apareceran numeros aleatorios
 
         $validar = $conexion->query("SELECT * FROM usuarios WHERE usuario = '$user' AND clave = '$pass'");
         $contar = $validar->num_rows;
@@ -43,6 +44,7 @@ if(isset($_SESSION["usuario"])){
             $_SESSION["usuario"] = $user;
             $_SESSION["id"] = $dato["id"];
             header("Location: index.php");
+            echo $_SESSION["usuario"];
         } else{
             echo "El usuario o contraseña no son validos o no existen.";
         }

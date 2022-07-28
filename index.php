@@ -40,7 +40,7 @@ session_start();
 
             $share = $_POST["mensaje"];
 
-            $insertar = $conexion->query("INSERT INTO publicaciones (mensaje, usuario, fecha) VALUES ('$share', '".$_SESSION['id']."', now())");
+            $insertar = $conexion->query("INSERT INTO publicaciones (mensaje, usuario, fecha) VALUES ('$share', '".$_SESSION['id']."', '".now()."')");
         }
     ?>
     <br>

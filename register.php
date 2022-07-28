@@ -16,7 +16,7 @@
             <input type="email" name="email" required><br>
         Clave: <br>
             <input type="password" name="pass" required><br>
-            <input type="submit" name="reg" value="Registrar">
+        <input type="submit" name="reg" value="Registrar">
     </form>
 
     <!--Recoleccion de datos de registro, control de clonacion de usuarios y redireccion a la pagina de login-->
@@ -28,7 +28,7 @@
             $user = $_POST["user"];
             $email = $_POST["email"];
             $filtroEmail = filter_var($email, FILTER_SANITIZE_EMAIL);
-            $pass = md5($_POST["pass"]);
+            $pass = md5($_POST["pass"]); //md5 se encarga de encriptar la contraseña, por ende en la BBDD apareceran numeros aleatorios
 
             $consulta = $conexion->query("SELECT * FROM usuarios WHERE usuario = '$user'");
             $consultaEmail = $conexion->query("SELECT * FROM usuarios WHERE email = '$email'");
@@ -53,8 +53,6 @@
             }
         }
         echo "<a href='login.php'>Log In</a>";
-
-echo $contarEmail;
     ?>
 </body>
 </html>

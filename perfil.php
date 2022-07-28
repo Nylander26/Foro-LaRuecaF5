@@ -18,8 +18,6 @@ if(!isset($_SESSION["usuario"])){
 </head>
 <body>
     
-    
-
     <!--Solicitud para mostrar el perfil logueado incluyendo nombre de perfil, fecha de creacion de cuenta y foto de perfil-->
     <?php if(isset($_GET["id"])){ 
 
@@ -35,6 +33,12 @@ if(!isset($_SESSION["usuario"])){
             Registrado desde: <?php echo $row['fecha'];?> <br><br>
             
             Foto de perfil: <img src="<?php echo $row['imagen'];?>" width="100"><br><br>
+
+            <a href="update.php?id=<?php echo $_SESSION['id']; ?>">Modificar Perfil</a></div>
+
+            <form action="" method="get">
+
+            </form>
             
             <!--Estructura de control en caso de que otro usuario fuera del que este logueado no pueda subir imagenes al perfil actualmente logueado-->
             <?php
@@ -62,7 +66,6 @@ if(!isset($_SESSION["usuario"])){
                         header("Location: perfil.php?id=".$_GET["id"]."");
                     };
                 }
-
             ?>
             <br><br><br><br>
 

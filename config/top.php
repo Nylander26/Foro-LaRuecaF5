@@ -5,9 +5,3 @@
     <div style= "float: left; width: 20%;">Buscar</div>
     <div style= "float: left; width: 20%;"><a href='logout.php'>Salir</a></div>
 </div>
-
-<?php
-
-
-
-?>
