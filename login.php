@@ -18,10 +18,10 @@ if(isset($_SESSION["usuario"])){
 <body>
     <h1>Login</h1><hr>
     <form action="" method="POST">
-        Usuario: <br>
-        <input type="text" name="user"><br>
+        Email: <br>
+            <input type="email" name="user"><br>
         Clave: <br>
-        <input type="password" name="pass"><br>
+            <input type="password" name="pass"><br>
         <input type="submit" name="login" value="Login"><a href="register.php" target="_blank">Registrese</a>
     </form>
 
@@ -34,7 +34,7 @@ if(isset($_SESSION["usuario"])){
 
         $user = $_POST["user"];
         $pass = $_POST["pass"];
-        $validar = $conexion->query("SELECT * FROM usuarios WHERE usuario = '$user' AND clave = '$pass'");
+        $validar = $conexion->query("SELECT * FROM usuarios WHERE email = '$user' AND clave = '$pass'");
         $dato = $validar->fetch_assoc();
         $contar = $validar->num_rows;
 

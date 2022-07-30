@@ -27,15 +27,20 @@ if(!isset($_SESSION["usuario"])){
     ?>
 
     <?php include("config/top.php"); ?> <br><br>
+        <?php if($_GET["id"] == $_SESSION["id"]){ ?>
 
+            Nombre y Apellido: <?php echo $row['nombrereal'];}?> <br><br>
+            
             Perfil de: <?php echo $row['usuario'];?> <br><br>
 
             Registrado desde: <?php echo $row['fecha'];?> <br><br>
             
             Foto de perfil: <img src="<?php echo $row['imagen'];?>" width="100"><br><br>
 
-            <a href="update.php?id=<?php echo $_SESSION['id']; ?>">Modificar Perfil</a></div>
-
+            <?php if($_GET["id"] == $_SESSION["id"]){ ?>
+                <a href="update.php?id=<?php echo $_SESSION['id']; ?>">Modificar Perfil</a></div>
+            <?php } ?>
+            
             <form action="" method="get">
 
             </form>
@@ -43,11 +48,10 @@ if(!isset($_SESSION["usuario"])){
             <!--Estructura de control en caso de que otro usuario fuera del que este logueado no pueda subir imagenes al perfil actualmente logueado-->
             <?php
                 if($_GET["id"] == $_SESSION["id"]){ ?>
-
-            <form action="" method="POST" enctype="multipart/form-data">
-                <input type="file" name="imagen">
-                <input type="submit" value="Subir" name="subir">
-            </form>
+                    <form action="" method="POST" enctype="multipart/form-data">
+                        <input type="file" name="imagen">
+                        <input type="submit" value="Subir" name="subir">
+                    </form>
             <?php } ?>
             
             <!--Protocolo para subir imagenes y almacenarlas en carpetas de trabajo del servidor y la BD-->
@@ -89,6 +93,5 @@ if(!isset($_SESSION["usuario"])){
 
             <?php } ?>
        <?php } ?>
-
 </body>
 </html>

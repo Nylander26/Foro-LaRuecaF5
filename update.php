@@ -25,12 +25,12 @@ if(!isset($_SESSION["usuario"])){
     
     <!--Estructura de control para validar si el usuario es el correcto para modificar el perfil-->
     <?php 
-        
-        if(isset($_GET["id"])){ 
-            require("config/config.php");
-            include("config/top.php");
-            $solicitar = $conexion->query("SELECT * FROM usuarios WHERE id = '".$_GET['id']."'");
-            $row = $solicitar->fetch_assoc();
+        if($_GET["id"] == $_SESSION["id"]){
+            if(isset($_GET["id"])){ 
+                require("config/config.php");
+                include("config/top.php");
+                $solicitar = $conexion->query("SELECT * FROM usuarios WHERE id = '".$_GET['id']."'");
+                $row = $solicitar->fetch_assoc();
        ?>
 
         <?php if($_GET["id"] == $_SESSION["id"]){ ?>
@@ -82,5 +82,6 @@ if(!isset($_SESSION["usuario"])){
                 //print_r($_SESSION);
             ?>
             <?php } ?>
+        <?php } ?>
 </body>
 </html>

@@ -73,5 +73,7 @@ session_start();
         echo "<a href='login.php'>Debes loguearte</a> o <a href='register.php'>Debes registrarte</a>";
     }
     ?>
+
+<?php //print_r($_SESSION); ?>
 </body>
 </html>
