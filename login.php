@@ -1,9 +1,9 @@
 <!--Inicio de Sesion-->
 <?php
-session_start();
-if(isset($_SESSION["usuario"])){
-    header("Location: index.php");
-}
+    session_start();
+    if(isset($_SESSION["usuario"])){
+        header("Location: index.php");
+    }
 ?>
 
 <!--Formato HTML-->
@@ -19,7 +19,7 @@ if(isset($_SESSION["usuario"])){
     <h1>Login</h1><hr>
     <form action="" method="POST">
         Email: <br>
-            <input type="email" name="user"><br>
+            <input type="email" name="email"><br>
         Clave: <br>
             <input type="password" name="pass"><br>
         <input type="submit" name="login" value="Login"><a href="register.php" target="_blank">Registrese</a>
@@ -32,22 +32,22 @@ if(isset($_SESSION["usuario"])){
 
         require ("config/config.php");
 
-        $user = $_POST["user"];
+        $emailLogin = $_POST["email"];
         $pass = $_POST["pass"];
-        $validar = $conexion->query("SELECT * FROM usuarios WHERE email = '$user' AND clave = '$pass'");
+        $validar = $conexion->query("SELECT * FROM usuarios WHERE email = '$emailLogin' AND clave = '$pass'");
         $dato = $validar->fetch_assoc();
         $contar = $validar->num_rows;
-
+        $busquedaId = $conexion->query("SELECT id FROM usuarios WHERE id = '".$dato["id"]."'");
+        $id = implode("", $busquedaId->fetch_assoc());
         if($contar == 1){
-            $_SESSION["usuario"] = $user;
+            $_SESSION["usuario"] = $emailLogin;
             $_SESSION["id"] = $dato["id"];
-            header("Location: index.php");
+            header("Location: index.php?id=$id");
             //echo $_SESSION["usuario"];
         } else{
             echo "El usuario o contraseña no son validos o no existen.";
         }
     } 
-    //print_r($_SESSION);
     ?>
 </body>
 </html>

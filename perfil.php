@@ -21,9 +21,10 @@ if(!isset($_SESSION["usuario"])){
     <!--Solicitud para mostrar el perfil logueado incluyendo nombre de perfil, fecha de creacion de cuenta y foto de perfil-->
     <?php if(isset($_GET["id"])){ 
 
-    require("config/config.php");
-    $solicitar = $conexion->query("SELECT * FROM usuarios WHERE id = '".$_GET['id']."'");
-    $row = $solicitar->fetch_assoc();
+        require("config/config.php");
+        $solicitar = $conexion->query("SELECT * FROM usuarios WHERE id = '".$_GET['id']."'");
+        $row = $solicitar->fetch_assoc();
+        
     ?>
 
     <?php include("config/top.php"); ?> <br><br>

@@ -20,7 +20,10 @@ session_start();
     if(isset($_SESSION["usuario"])){
     ?>
 
-    <?php include("config/top.php"); ?>
+    <?php 
+        require("config/config.php");
+        include("config/top.php"); 
+    ?>
 
     <br><br>
 

@@ -37,11 +37,11 @@
             
             if($contar > 0){
 
-                echo "Ya hay un usuario con ese nombre, cambialo";
+                echo "Ya existe un usuario con ese nombre.";
 
             } elseif($contarEmail > 0){
 
-                echo "Ya hay un usuario con ese correo, cambialo";
+                echo "Ya existe un usuario con ese correo.";
 
             } else{
 
