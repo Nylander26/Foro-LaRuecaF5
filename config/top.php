@@ -6,7 +6,7 @@
 
 ?>
 <div style = "width: 100%; float: left; margin-bottom: 30px;">
-    <div style= "float: left; width: 20%;"><?php echo "Bienvenido ". $row['usuario'] ?? null."<br><br>"; ?></div>
+    <div style= "float: left; width: 20%;"><?php echo "Bienvenido ". $row['usuario']."<br><br>"; ?></div>
     <div style= "float: left; width: 20%;"><a href="index.php?id=<?php echo $_SESSION['id']; ?>">Home</a></div>
     <div style= "float: left; width: 20%;"><a href="perfil.php?id=<?php echo $_SESSION['id']; ?>">Mi Perfil</a></div>
     <div style= "float: left; width: 20%;">Buscar</div>
