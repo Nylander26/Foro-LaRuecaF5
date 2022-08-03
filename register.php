@@ -30,6 +30,7 @@
             $filtroEmail = filter_var($email, FILTER_SANITIZE_EMAIL);
             $pass = $_POST["pass"]; 
 
+            $userPubli = $conexion->query("SELECT * FROM usuarios WHERE usuariopublico = '$user'");
             $consulta = $conexion->query("SELECT * FROM usuarios WHERE usuario = '$user'");
             $consultaEmail = $conexion->query("SELECT * FROM usuarios WHERE email = '$email'");
             $contar = $consulta->num_rows;
@@ -45,7 +46,7 @@
 
             } else{
 
-                $insertar = $conexion->query("INSERT INTO usuarios (usuario, email, clave, fecha) VALUES('$user', '$email', '$pass', now())");
+                $insertar = $conexion->query("INSERT INTO usuarios (usuario, email, clave, fecha, usuariopublico) VALUES('$user', '$email', '$pass', now(), '$user')");
     
                 if($insertar){
                     echo "Te has registrado correctamente";

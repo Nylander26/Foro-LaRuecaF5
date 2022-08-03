@@ -56,13 +56,13 @@ session_start();
         $mensajes = $conexion->query("SELECT * FROM publicaciones ORDER BY id desc");
         while ($row = $mensajes->fetch_assoc()){ 
             
-            $usuarioName = $conexion->query("SELECT usuario FROM usuarios WHERE id = '".$row['usuario']."'");
+            $usuarioName = $conexion->query("SELECT usuariopublico FROM usuarios WHERE id = '".$row['usuario']."'");
             $rowUser = $usuarioName->fetch_assoc();
             ?>
 
             <div>
                 <div><?php echo $row["mensaje"]; ?></div>
-                <div><a href="perfil.php?id=<?php echo $row['usuario']; ?>"><?php echo $rowUser["usuario"]; ?></a></div>
+                <div><a href="perfil.php?id=<?php echo $row['usuario']; ?>"><?php echo $rowUser['usuariopublico']; ?></a></div>
                 <div><?php echo $row['fecha']; ?></div>
             </div>
             <br>
