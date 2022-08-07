@@ -5,7 +5,7 @@
 $CONserver = "localhost";
 $CONuser = "root";
 $CONpass = "";
-$CONbd = "redsocial";
+$CONbd = "foro";
 
 $conexion = new mysqli($CONserver, $CONuser, $CONpass, $CONbd);
 

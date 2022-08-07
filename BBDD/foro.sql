@@ -1,5 +1,9 @@
 -- --------------------------------------------------------
+<<<<<<< HEAD
 -- Host:                         localhost
+=======
+-- Host:                         127.0.0.1
+>>>>>>> origin/Wolfgang
 -- Versión del servidor:         10.4.24-MariaDB - mariadb.org binary distribution
 -- SO del servidor:              Win64
 -- HeidiSQL Versión:             12.0.0.6468
@@ -16,8 +20,11 @@
 
 -- La exportación de datos fue deseleccionada.
 
+<<<<<<< HEAD
 -- La exportación de datos fue deseleccionada.
 
+=======
+>>>>>>> origin/Wolfgang
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
