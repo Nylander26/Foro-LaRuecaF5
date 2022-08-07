@@ -37,9 +37,9 @@
         $validar = $conexion->query("SELECT * FROM usuarios WHERE email = '$emailLogin' AND clave = '$pass'");
         $dato = $validar->fetch_assoc();
         $contar = $validar->num_rows;
-        $busquedaId = $conexion->query("SELECT id FROM usuarios WHERE id = '".$dato["id"]."'");
-        $id = implode("", $busquedaId->fetch_assoc());
         if($contar == 1){
+            $busquedaId = $conexion->query("SELECT id FROM usuarios WHERE id = '".$dato["id"]."'");
+            $id = implode("", $busquedaId->fetch_assoc());
             $_SESSION["usuario"] = $emailLogin;
             $_SESSION["id"] = $dato["id"];
             header("Location: index.php?id=$id");

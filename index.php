@@ -17,14 +17,10 @@ session_start();
     
     <!--Definir Usuario en caso de loguearse de manera exitosa y de ser exitoso el login se muestra el cuadro de publicacion-->
     <?php
-    if(isset($_SESSION["usuario"])){
-    ?>
-
-    <?php 
-        require("config/config.php");
-        include("config/top.php"); 
-    ?>
-
+        if(isset($_SESSION["usuario"])){
+            require("config/config.php");
+            include("config/top.php"); 
+        ?> 
     <br><br>
 
     <!--Cuadro de Texto para compartir publicaciones-->
