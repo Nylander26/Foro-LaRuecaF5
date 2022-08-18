@@ -1,8 +1,10 @@
 <!--Inicio de Sesion-->
+
 <?php
 session_start();
 if(isset($_SESSION["usuario"])){
-    header("Location: index.php");
+
+    header("Location: foryou.php");
 }
 ?>
 
@@ -17,7 +19,7 @@ if(isset($_SESSION["usuario"])){
 </head>
 <body>
     <h1>Login</h1><hr>
-    <form action="" method="POST">
+    <form action method="POST">
         Usuario: <br>
         <input type="text" name="user"><br>
         Clave: <br>
@@ -29,24 +31,33 @@ if(isset($_SESSION["usuario"])){
     <?php
 
     if(isset($_POST["login"])){
-
         require ("config/config.php");
 
         $user = $_POST["user"];
         $pass = md5($_POST["pass"]);
 
         $validar = $conexion->query("SELECT * FROM usuarios WHERE usuario = '$user' AND clave = '$pass'");
+        $status=$conexion->query("SELECT `estado` FROM usuarios WHERE `usuario` = '$user' AND  `clave` = '$pass'");
         $contar = $validar->num_rows;
         $dato = $validar->fetch_assoc();
 
-        if($contar == 1){
+        
+        if($contar == 1)
+        
+        {
             $_SESSION["usuario"] = $user;
             $_SESSION["id"] = $dato["id"];
-            header("Location: index.php");
-        } else{
-            echo "El usuario o contraseña no son validos o no existen.";
+            $_SESSION["estado"] = $dato["estado"];
+            header("Location: foryou.php");
         }
-    } 
+        else
+        {
+         echo "El usuario no existe o los datos son incorrectos";
+        }
+         
+        
+    }
+
     ?>
 </body>
 </html>

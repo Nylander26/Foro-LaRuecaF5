@@ -3,7 +3,7 @@
 session_start();
 
 if(!isset($_SESSION["usuario"])){
-    header("Location: index.php");
+    header("Location: foryou.php");
 }
 ?>
 
@@ -26,6 +26,7 @@ if(!isset($_SESSION["usuario"])){
     require("config/config.php");
     $solicitar = $conexion->query("SELECT * FROM usuarios WHERE id = '".$_GET['id']."'");
     $row = $solicitar->fetch_assoc();
+    $id= $row['id'];
     ?>
 
     <?php include("config/top.php"); ?> <br><br>
@@ -33,7 +34,19 @@ if(!isset($_SESSION["usuario"])){
             Perfil de: <?php echo $row['usuario'];?> <br><br>
 
             Registrado desde: <?php echo $row['fecha'];?> <br><br>
-            
+
+            Estado de la cuenta: <?php echo $row['estado']; ?> <br><br>
+
+            Desactivar mi cuenta:<form action="" method="POST">
+            <input type="hidden" name="id" value= "<?php echo $id ?>"><br>
+            <input type="submit" name="desactivar" value="Desactivar mi usuario"></form>
+            <?php 
+    
+        if(isset($_POST["desactivar"])){
+            $desactivar = $conexion->query("UPDATE usuarios SET estado = 'inactivo' WHERE  id = $id ");
+                echo "Has cambiado el estado de tu cuenta a Inactivo. Tranquilo, aún podrás utilizar forYou (incluso puedes volver con este mismo usuario).";
+            }
+            ?>
             Foto de perfil: <img src="<?php echo $row['imagen'];?>" width="100"><br><br>
             
             <!--Estructura de control en caso de que otro usuario fuera del que este logueado no pueda subir imagenes al perfil actualmente logueado-->
