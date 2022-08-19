@@ -41,10 +41,19 @@ if(!isset($_SESSION["usuario"])){
             <?php if($_GET["id"] == $_SESSION["id"]){ ?>
                 <a href="update.php?id=<?php echo $_SESSION['id']; ?>">Modificar Perfil</a></div>
             <?php } ?>
-            
-            <form action="" method="get">
-
+            <br>
+            Desactivar mi cuenta:
+            <form action="" method="POST">
+                <input type="hidden" name="id" value= "<?php echo $id ?>"><br>
+                <input type="submit" name="desactivar" value="Desactivar mi usuario">
             </form>
+            <?php 
+    
+            if(isset($_POST["desactivar"])){
+                $desactivar = $conexion->query("UPDATE usuarios SET estado = 'inactivo' WHERE  id = $id ");
+                echo "Has cambiado el estado de tu cuenta a Inactivo. Tranquilo, aún podrás utilizar forYou (incluso puedes volver con este mismo usuario).";
+            }
+            ?>
             
             <!--Estructura de control en caso de que otro usuario fuera del que este logueado no pueda subir imagenes al perfil actualmente logueado-->
             <?php
