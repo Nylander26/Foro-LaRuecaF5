@@ -9,31 +9,50 @@ if(isset($_SESSION["usuario"])){
 ?>
 
 <!--Formato HTML-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./styles/login.css">
     <title>Login</title>
+    <link rel="stylesheet" href="./styles/loginCode.css">
 </head>
 <body>
-    <div class="divLogin">
-    <img src="img/logo1.png" class="logo">
-    <br>
-    <div class="subDivLogin">
-    <form action method="POST">
-        <label>Usuario: </label>
-        <input type="text" name="user"><br><br>
-        <label>Clave: </label>
-        <input type="password" name="pass"><br><br>
-        <input class= "loginButton" type="submit" name="login" value="Login"><br><br>
-        <a href="register.php" target="_blank">Registrese</a>
-    </form>
-    </div>
-   <!--Formato para validar inicios de sesion recuperando el id de MySQL y redireccionando a la pagina de inicio-->
-  <p class= "mensaje"> <?php
+    <div class="login-box">
+        <div class="container-logo">
+            <img src="./img/logo1.png" alt="logo" class="logo">
+        </div>
+        <h2>Login</h2>
+        <form class="container-form">
+        <div class="user-box">
+            <input type="text" name="user" required="">
+            <label>Username</label>
+        </div>
+        <div class="user-box">
+            <input type="password" name="pass" required="">
+            <label>Password</label>
+        </div>
+        <a href="index.php" name="login" >
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            Login
+        </a>
+        <a href="register.php" name="register">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            Registro
+        </form>
+    </div>    
+</body>
+</html>
+
+    <?php
 
 if(isset($_POST["login"])){
     require ("config/config.php");
