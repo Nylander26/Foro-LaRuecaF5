@@ -1,0 +1,17 @@
+body
+{
+    background-color:#2EC49D;
+    display: flex;
+    flex-direction: column;
+    justify-content: center ;  
+    align-content: center;
+    align-items: center;
+    justify-items: center;
+    width: 95%;
+    margin:20px;
+}
+
+.logo
+{
+    width: 20%
+}

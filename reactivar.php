@@ -10,7 +10,7 @@
     <title>Reactivación de Usuario</title>
 </head>
 <body>
-    <h1>Registro</h1><hr>
+    <h1>Reactivar Usuario</h1><hr>
     <form action="" method="POST">
         Usuario: <br>
             <input type="text" name="user"><br>
