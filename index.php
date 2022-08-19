@@ -75,6 +75,13 @@ session_start();
 
     <!--Muestra la tabla de temas creados-->
 
+    <table style="width: 100%; text-align: center;">
+        <tr>
+            <th>Titulo</th>
+            <th>Fecha</th>
+            <th>Respuestas</th>
+            <th>Descripcion</th>
+        </tr>
     <?php
         
         require("config/config.php");
@@ -89,14 +96,6 @@ session_start();
             $titulo = $conexion->query("SELECT * FROM publicaciones WHERE id = $usuarioRow ORDER BY id desc");
             $rowTitulo = $titulo->fetch_assoc();
             ?>
-            
-            <table style="width: 100%; text-align: center;">
-                <tr>
-                    <th>Titulo</th>
-                    <th>Fecha</th>
-                    <th>Respuestas</th>
-                    <th>Descripcion</th>
-                </tr>
                 <tr>
                     <td><?php echo $row["titulo"]; ?></td>
                     <td><?php echo $newDate; ?></td>
@@ -104,8 +103,8 @@ session_start();
                     <td><?php echo $row["mensaje"]; ?></td>
                     <td><a href="temas.php?id=<?php echo $row['titulo']; ?>">Ver Tema</td>
                 </tr>
+                <?php } ?>
             </table>   
-       <?php } ?>
 <?php //print_r($_SESSION); ?>
 </body>
 </html>
