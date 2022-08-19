@@ -8,6 +8,10 @@ html {
     background: linear-gradient(#83c7ad, #339565);
     }
 
+    .container-all{
+       
+    }
+
     .container-logo{
         display: flex;
         justify-content: center;
