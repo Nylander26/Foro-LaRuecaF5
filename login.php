@@ -4,7 +4,7 @@
 session_start();
 if(isset($_SESSION["usuario"])){
 
-    header("Location: foryou.php");
+    header("Location: index.php");
 }
 ?>
 
@@ -28,15 +28,14 @@ if(isset($_SESSION["usuario"])){
             <h2>Login</h2>
             <form class="container-form" autocomplete="off" method="POST">
             <div class="user-box">
-                <input type="text" name="user" required="">
-                <label>Username</label>
+                <input type="email" name="email" required="">
+                <label>Email</label>
             </div>
             <div class="user-box">
                 <input type="password" name="pass" required="">
                 <label>Password</label>
             </div>
-            <input type="submit" value="Login" name="login" class="btn">
-                <span></span><span></span><span></span><span></span>
+                <input type="submit" value="Login" name="login" class="btn">
             </form>
         </div>
         <hr>
@@ -83,18 +82,18 @@ if(isset($_SESSION["usuario"])){
             
             if($contar > 0){
 
-                echo "Ya existe un usuario con ese nombre.";
+                echo '<script>alert("Ya existe un usuario con ese nombre.")</script>';
 
             } elseif($contarEmail > 0){
 
-                echo "Ya existe un usuario con ese correo.";
+                echo '<script>alert("Ya existe un correo con ese nombre.")</script>';
 
             } else{
 
                 $insertar = $conexion->query("INSERT INTO usuarios (usuario, email, clave, fecha, usuariopublico) VALUES('$user', '$email', '$pass', now(), '$user')");
     
                 if($insertar){
-                    echo "Te has registrado correctamente";
+                    echo '<script>alert("Te has registrado correctamente.")</script>';
                 }
             }
         }
@@ -107,11 +106,11 @@ if(isset($_SESSION["usuario"])){
         if(isset($_POST["login"])){
             require ("config/config.php");
 
-            $user = $_POST["user"];
+            $email = $_POST["email"];
             $pass = $_POST["pass"];
 
-            $validar = $conexion->query("SELECT * FROM usuarios WHERE usuario = '$user' AND clave = '$pass'");
-            $status=$conexion->query("SELECT `estado` FROM usuarios WHERE `usuario` = '$user' AND  `clave` = '$pass'");
+            $validar = $conexion->query("SELECT * FROM usuarios WHERE email = '$email' AND clave = '$pass'");
+            $status=$conexion->query("SELECT `estado` FROM usuarios WHERE `usuario` = '$email' AND  `clave` = '$pass'");
             $contar = $validar->num_rows;
             $dato = $validar->fetch_assoc();
 
@@ -119,15 +118,15 @@ if(isset($_SESSION["usuario"])){
             if($contar === 1)
             
             {
-                $_SESSION["usuario"] = $user;
+                $_SESSION["usuario"] = $email;
                 $_SESSION["id"] = $dato["id"];
                 $_SESSION["estado"] = $dato["estado"];
                 //print_r($dato);
-                header("Location: foryou.php");
+                header("Location: index.php");
             }
             else
             {
-            echo "El usuario no existe o los datos son incorrectos";
+                echo '<script>alert("El usuario no existe o los datos son incorrectos")</script>';
             }
         }
     ?>

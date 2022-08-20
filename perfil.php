@@ -3,7 +3,7 @@
 session_start();
 
 if(!isset($_SESSION["usuario"])){
-    header("Location: foryou.php");
+    header("Location: index.php");
 }
 ?>
 
