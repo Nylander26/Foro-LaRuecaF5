@@ -61,70 +61,75 @@ if(isset($_SESSION["usuario"])){
               <input type="submit" value="Registrarse" name="reg" class="btn">
             </form>
         </div>
+    </div>
 
-        <!--Recoleccion de datos de registro, control de clonacion de usuarios y redireccion a la pagina de login-->
-        <?php
+    <!--Logica Registro-->
+    
+    <?php
 
-            if(isset($_POST["reg"])){
+        if(isset($_POST["reg"])){
 
-                require("config/config.php");
-                $user = $_POST["user"];
-                $email = $_POST["email"];
-                $filtroEmail = filter_var($email, FILTER_SANITIZE_EMAIL);
-                $pass = $_POST["pass"]; 
+            require("config/config.php");
+            $user = $_POST["user"];
+            $email = $_POST["email"];
+            $filtroEmail = filter_var($email, FILTER_SANITIZE_EMAIL);
+            $pass = $_POST["pass"]; 
 
-                $userPubli = $conexion->query("SELECT * FROM usuarios WHERE usuariopublico = '$user'");
-                $consulta = $conexion->query("SELECT * FROM usuarios WHERE usuario = '$user'");
-                $consultaEmail = $conexion->query("SELECT * FROM usuarios WHERE email = '$email'");
-                $contar = $consulta->num_rows;
-                $contarEmail = $consultaEmail->num_rows;
-                
-                if($contar > 0){
+            $userPubli = $conexion->query("SELECT * FROM usuarios WHERE usuariopublico = '$user'");
+            $consulta = $conexion->query("SELECT * FROM usuarios WHERE usuario = '$user'");
+            $consultaEmail = $conexion->query("SELECT * FROM usuarios WHERE email = '$email'");
+            $contar = $consulta->num_rows;
+            $contarEmail = $consultaEmail->num_rows;
+            
+            if($contar > 0){
 
-                    echo "Ya existe un usuario con ese nombre.";
+                echo "Ya existe un usuario con ese nombre.";
 
-                } elseif($contarEmail > 0){
+            } elseif($contarEmail > 0){
 
-                    echo "Ya existe un usuario con ese correo.";
+                echo "Ya existe un usuario con ese correo.";
 
-                } else{
+            } else{
 
-                    $insertar = $conexion->query("INSERT INTO usuarios (usuario, email, clave, fecha, usuariopublico) VALUES('$user', '$email', '$pass', now(), '$user')");
-        
-                    if($insertar){
-                        echo "Te has registrado correctamente";
-                    }
+                $insertar = $conexion->query("INSERT INTO usuarios (usuario, email, clave, fecha, usuariopublico) VALUES('$user', '$email', '$pass', now(), '$user')");
+    
+                if($insertar){
+                    echo "Te has registrado correctamente";
                 }
             }
-        ?>
-        <?php
-
-            if(isset($_POST["login"])){
-                require ("config/config.php");
-
-                $user = $_POST["user"];
-                $pass = $_POST["pass"];
-
-                $validar = $conexion->query("SELECT * FROM usuarios WHERE usuario = '$user' AND clave = '$pass'");
-                $status=$conexion->query("SELECT `estado` FROM usuarios WHERE `usuario` = '$user' AND  `clave` = '$pass'");
-                $contar = $validar->num_rows;
-                $dato = $validar->fetch_assoc();
-
-                
-                if($contar === 1)
-                
-                {
-                    $_SESSION["usuario"] = $user;
-                    $_SESSION["id"] = $dato["id"];
-                    $_SESSION["estado"] = $dato["estado"];
-                    //print_r($dato);
-                    header("Location: foryou.php");
-                }
-                else
-                {
-                echo "El usuario no existe o los datos son incorrectos";
-                }
-            }
+        }
     ?>
-    </body>
+
+    <!--Logica Login-->
+
+    <?php
+
+        if(isset($_POST["login"])){
+            require ("config/config.php");
+
+            $user = $_POST["user"];
+            $pass = $_POST["pass"];
+
+            $validar = $conexion->query("SELECT * FROM usuarios WHERE usuario = '$user' AND clave = '$pass'");
+            $status=$conexion->query("SELECT `estado` FROM usuarios WHERE `usuario` = '$user' AND  `clave` = '$pass'");
+            $contar = $validar->num_rows;
+            $dato = $validar->fetch_assoc();
+
+            
+            if($contar === 1)
+            
+            {
+                $_SESSION["usuario"] = $user;
+                $_SESSION["id"] = $dato["id"];
+                $_SESSION["estado"] = $dato["estado"];
+                //print_r($dato);
+                header("Location: foryou.php");
+            }
+            else
+            {
+            echo "El usuario no existe o los datos son incorrectos";
+            }
+        }
+    ?>
+</body>
 </html>
