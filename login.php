@@ -115,14 +115,15 @@ if(isset($_SESSION["usuario"])){
             $dato = $validar->fetch_assoc();
 
             
-            if($contar === 1)
-            
-            {
+            if($contar === 1) {
+
+                $busquedaId = $conexion->query("SELECT id FROM usuarios WHERE id = '".$dato["id"]."'");
+                $id = implode("", $busquedaId->fetch_assoc());
                 $_SESSION["usuario"] = $email;
                 $_SESSION["id"] = $dato["id"];
                 $_SESSION["estado"] = $dato["estado"];
+                header("Location: index.php?id=$id");
                 //print_r($dato);
-                header("Location: index.php");
             }
             else
             {
