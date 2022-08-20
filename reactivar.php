@@ -28,7 +28,7 @@
 
             require("config/config.php");
             $user = $_POST["user"];
-            $pass = md5($_POST["pass"]);
+            $pass = $_POST["pass"];
             //$email= $_POST["correo"];
 
            // $consulta = $conexion->query("SELECT * FROM usuarios WHERE usuario = '$user' AND clave = '$pass'");
