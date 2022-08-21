@@ -53,7 +53,7 @@ if(!isset($_SESSION["usuario"])){
             
                     <form action="" method="POST" enctype="multipart/form-data">
                         <div class="custom-input-file">
-                            <input type="file" name="imagen" class="input-file">
+                            <input type="file" name="imagen" class="btn">
                             <input type="submit" value="Subir" name="subir" class="btn">
                         </div>
                     </form>
