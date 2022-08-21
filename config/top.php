@@ -15,10 +15,6 @@
     $solicitar = $conexion->query("SELECT * FROM usuarios WHERE id = '".$_GET['id']."'");
     $row = $solicitar->fetch_assoc();
 
-    require("config/config.php");
-    $solicitar = $conexion->query("SELECT * FROM usuarios WHERE id = '".$_GET['id']."'");
-    $row = $solicitar->fetch_assoc();
-
     ?>
     <?php if ($_GET["id"] == $_SESSION["id"]){ ?>
         <div class="container-top">
