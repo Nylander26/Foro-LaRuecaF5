@@ -11,20 +11,19 @@ if(!$_SESSION["usuario"]){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nuevo Hilo</title>
+    <title>Nuevo Comentario</title>
 </head>
 <body>
 
 
 <!--Cuadro de Texto para compartir publicaciones -->
 
-<?php $idTema= $_POST['newHilo'] ?? null; ?>
+<?php $idHilo= $_POST['newComent'] ?? null; ?>
     <form action="" method="POST">
-    <input type="text" name="descHilo" placeholder="Descripción"><br>
-        <textarea name="contHilo" id="" cols="50" rows="8" placeholder="¿Qué estás pensando?"></textarea>
+        <textarea name="comentHilo" id="" cols="50" rows="8" placeholder="Ingresa aquí tu comentario"></textarea>
         <br>
-        <input type="hidden" name="new" value="<?php echo $idTema; ?>">
-        <input type="submit" name="share" value="Compartir">
+        <input type="hidden" name="new" value="<?php echo $idHilo; ?>">
+        <input type="submit" name="share" value="Comentar">
         
     </form>
     <a href="index.php?id=<?php echo $_SESSION['id']; ?>">
@@ -39,10 +38,9 @@ if(!$_SESSION["usuario"]){
    if(isset($_POST["share"])){
    
             require("config/config.php");
-            $descHilo=$_POST['descHilo'];
-            $conHilo = $_POST['contHilo'];
-            $idTemaHilo= $_POST["new"];
-            $insertar = $conexion->query("INSERT INTO hilos (hilos, contHilo, idUsuario, idTemas) VALUES ('$descHilo', '$conHilo', '$idUsuario', '$idTemaHilo')");
+            $comentHilo = $_POST['comentHilo'];
+            $idHiloComent= $_POST["new"];
+            $insertar = $conexion->query("INSERT INTO comentarios (comentario, idHilo, idUsuario) VALUES ('$comentHilo', '$idHiloComent', '$idUsuario')");
         }
     ?>
     <br>
