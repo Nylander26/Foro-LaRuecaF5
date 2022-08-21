@@ -1,5 +1,28 @@
-.divTop
-{
-    float: left;
-     width: 20%;
+.container-top{
+    width: 100%; 
+    margin-bottom: 3%; 
+    display: flex; 
+    justify-content: space-around; 
+    margin: 2% 1% -5% 2%;
+}
+
+.body-top{
+    float: left; 
+    width: 20%;
+}
+
+.body-top a {
+    text-decoration: none;
+    color: black;
+}
+
+.body-top a:hover{
+    background: #03e9f4;
+    color: rgb(255, 255, 255);
+    border-radius: 5px;
+    box-shadow: 0 0 5px #03e9f4,
+                0 0 25px #03e9f4,
+                0 0 50px #03e9f4,
+                0 0 100px #03e9f4;
+    border-radius: 40px;
 }

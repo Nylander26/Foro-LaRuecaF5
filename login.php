@@ -27,14 +27,14 @@ if(isset($_SESSION["usuario"])){
             </div>
             <h2>Login</h2>
             <form class="container-form" autocomplete="off" method="POST">
-            <div class="user-box">
-                <input type="email" name="email" required="">
-                <label>Email</label>
-            </div>
-            <div class="user-box">
-                <input type="password" name="pass" required="">
-                <label>Password</label>
-            </div>
+                <div class="user-box">
+                    <input type="email" name="email" required="">
+                    <label>Email</label>
+                </div>
+                <div class="user-box">
+                    <input type="password" name="pass" required="">
+                    <label>Password</label>
+                </div>
                 <input type="submit" value="Login" name="login" class="btn">
             </form>
         </div>
