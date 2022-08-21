@@ -77,7 +77,11 @@ if(!isset($_SESSION["usuario"])){
                 <?php } ?>
                 <br>
                 <br>
-                <form action="update.php" method="post"></form>
+                <article>
+                    <form action="update.php?id=<?php echo $_SESSION["id"]?>" method="POST">
+                        <input type="submit" value="Modificar Perfil" class="btn">
+                    </form>
+                </article>
                 <br>
                 <br>
                 <div class="desactivar">
