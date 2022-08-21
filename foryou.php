@@ -22,52 +22,53 @@ session_start();
     {
     if(isset($_SESSION["usuario"])){
     ?>
-    
+
     <?php include("config/top.php"); ?>
 
-    <br><br>
 
-    <!--Cuadro de Texto para compartir publicaciones-->
-    <form action="" method="POST">
-        <textarea name="mensaje" id="" cols="50" rows="8" placeholder="Que estas pensando?"></textarea>
-        <br>
-        <input type="submit" name="share" value="Compartir">
-    </form>
-
-    <!--Almacenar publicaciones mediante la funcionalidad del boton SHARE-->
-    <?php
-        
-        if(isset($_POST["share"])){
-            
-            require("config/config.php");
-
-            $share = $_POST["mensaje"];
-
-            $insertar = $conexion->query("INSERT INTO publicaciones (mensaje, usuario, fecha) VALUES ('$share', '".$_SESSION['id']."', now())");
-        }
-    ?>
-    <br>
+   
 
     <!--Mostrar publicaciones almacenadas anteriormente y mostrando el nombre de usuario-->
     <?php
 
         require("config/config.php");
 
-        $mensajes = $conexion->query("SELECT * FROM publicaciones ORDER BY id desc");
-        while ($row = $mensajes->fetch_assoc()){ 
+        $mensajes = $conexion->query("SELECT * FROM temas ORDER BY id asc");
+        while ($row = $mensajes->fetch_assoc())
+    { 
             
             $usuarioName = $conexion->query("SELECT usuario FROM usuarios WHERE id = '".$row['usuario']."'");
             $rowUser = $usuarioName->fetch_assoc();
             ?>
 
-            <div>
-                <div><?php echo $row["mensaje"]; ?></div>
-                <div><a href="perfil.php?id=<?php echo $row['usuario']; ?>"><?php echo $rowUser["usuario"]; ?></a></div>
-            </div>
-            <br>
+        <div class="divTema">
 
+               <h3> <?php echo $row["titulo"]; ?> </h3>
+               
+               <h5><?php echo $row["descripcion"]; ?> </h5>
+            
+              <p>  <?php echo $row["contenido"]; ?> </p>
+                
+              <form action="" method="POST">
+                <input type="hidden" name="idTema" value="<?php echo $row["id"]; ?>">
+                <input type="submit" class= "inputTema" value="Ver hilos de <?php echo $row["titulo"]; ?>">
+        </form>
+        <?php 
+if(isset($_POST["idTema"]))
+{
+    include ('temas.php');
+}
+        
+         ?>
+         
+        
+            </div>
+           
+            <br>
+            
         <?php } ?>
 
+        
         <!--Si el usuario no esta logueado no se muestra el cuadro de texto para publicaciones ni se muestran las publicaciones realizadas-->
         <?php
 
