@@ -24,6 +24,8 @@
             while ($row = $hilos->fetch_assoc()){
     
                 $usuarioName = $conexion->query("SELECT usuario FROM usuarios WHERE id = '".$row['idUsuario']."'");
+                $usuarioImg = $conexion->query("SELECT imagen FROM usuarios WHERE id = '".$row['idUsuario']."'");
+                $rowImg = $usuarioImg->fetch_assoc();
                 $rowUser = $usuarioName->fetch_assoc(); ?>
     
                 <!--Imprime tantos hilos existan en el Tema -->
@@ -31,7 +33,7 @@
                 <div class="divHilo" >
                     <h3> <?php echo $row["hilos"]; ?> </h3>
                     <h4> Publicado por: <?php echo $rowUser["usuario"]; ?> </h4>
-                    <!--<img src="<?php echo $rowUser["imagen"];?>">-->
+                    <img src="<?php echo $rowImg["imagen"];?>">
                     
                     <?php 
                         $idHilo= $_SESSION["id"];
