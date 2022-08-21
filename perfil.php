@@ -53,7 +53,7 @@ if(!isset($_SESSION["usuario"])){
             
                     <form action="" method="POST" enctype="multipart/form-data">
                         <div class="custom-input-file">
-                            <input type="file" name="imagen" class="btn">
+                            <input type="file" name="imagen">
                             <input type="submit" value="Subir" name="subir" class="btn">
                         </div>
                     </form>
@@ -75,7 +75,9 @@ if(!isset($_SESSION["usuario"])){
                         }
                     ?>
                 <?php } ?>
-                
+                <br>
+                <br>
+                <form action="update.php" method="post"></form>
                 <br>
                 <br>
                 <div class="desactivar">
