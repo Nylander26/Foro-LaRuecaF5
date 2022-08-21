@@ -3,7 +3,7 @@
 session_start();
 
 if(!isset($_SESSION["usuario"])){
-    header("Location: foryou.php");
+    header("Location: index.php");
 }
 ?>
 
@@ -14,7 +14,7 @@ if(!isset($_SESSION["usuario"])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./styles/foryou.css">
+    <link rel="stylesheet" href="./styles/perfil.css">
     <title>Perfil</title>
 </head>
 <body>
@@ -28,60 +28,82 @@ if(!isset($_SESSION["usuario"])){
     $solicitar = $conexion->query("SELECT * FROM usuarios WHERE id = '".$_GET['id']."'");
     $row = $solicitar->fetch_assoc();
     $id= $row['id'];
+    $date = $row["fecha"];
+    $timestamp = strtotime($date); 
+    $newDate = date("d-m-Y", $timestamp);
     ?>
 
     <?php include("config/top.php"); ?> <br><br>
 
-            Perfil de: <?php echo $row['usuario'];?> <br><br>
+        <div class="container-all">
+            <div class="login-box">
+                <h2>Perfil de:</h2><?php echo '<article>'.$row['usuario'].'</article>';?> <br><br>
 
-            Registrado desde: <?php echo $row['fecha'];?> <br><br>
+                <h2>Registrado desde:</h2> <?php echo '<article>'.$newDate.'</article>';?> <br><br>
 
-            Estado de la cuenta: <?php echo $row['estado']; ?> <br><br>
+                <h2>Estado de la cuenta:</h2> <?php echo '<article>'.$row['estado'].'</article>';?> <br><br>
+                
+                <h2>Foto de perfil:</h2> <img src="<?php echo $row['imagen'];?>" width="100"><br><br>
+                
+                <!--Estructura de control en caso de que otro usuario fuera del que este logueado no pueda subir imagenes al perfil actualmente logueado-->
 
-            Desactivar mi cuenta:<form action="" method="POST">
-            <input type="hidden" name="id" value= "<?php echo $id ?>"><br>
-            <input type="submit" name="desactivar" value="Desactivar mi usuario"></form>
+                <?php
+
+                    if($_GET["id"] == $_SESSION["id"]){ ?>
+            
+                    <form action="" method="POST" enctype="multipart/form-data">
+                        <div class="custom-input-file">
+                            <input type="file" name="imagen" class="btn">
+                            <input type="submit" value="Subir" name="subir" class="btn">
+                        </div>
+                    </form>
+                    <!--Protocolo para subir imagenes y almacenarlas en carpetas de trabajo del servidor y la BD-->
+                    <?php
+                
+                        if(isset($_POST["subir"])){
+                            $ruta = "fotodeperfil/";
+                            $fichero = $ruta.basename($_FILES["imagen"]["name"]);
+                            $rut = $ruta.$_GET["id"].".jpg";
+                
+                            if(move_uploaded_file($_FILES["imagen"]["tmp_name"], $ruta.$_GET["id"].".jpg")) {
+                                
+                                require("config/config.php");
+                
+                                $insertar = $conexion->query("UPDATE usuarios SET imagen = '$rut' WHERE id = '".$_GET['id']."'");
+                                header("Location: perfil.php?id=".$_GET["id"]."");
+                            };
+                        }
+                    ?>
+                <?php } ?>
+                
+                <br>
+                <br>
+                <div class="desactivar">
+                    <h2>Desactivar mi cuenta:</h2>
+                    <form action="" method="POST">
+                        <input type="submit" name="desactivar" value="Desactivar mi usuario" class="btn">
+                        <input type="hidden" name="id" value= "<?php echo $id ?>"><br>
+                    </form>
+                </div>
+        <?php 
+
+        $desactivar = $conexion->query("UPDATE usuarios SET estado = 'inactivo' WHERE  id = $id "); ?>
+
+            <?php if(isset($_POST["desactivar"])){ ?>
+                <style type="text/css">
+                    .desactivar{
+                        display: none;
+                    }
+                </style>
             <?php 
-    
-        if(isset($_POST["desactivar"])){
-            $desactivar = $conexion->query("UPDATE usuarios SET estado = 'inactivo' WHERE  id = $id ");
-                echo "Has cambiado el estado de tu cuenta a Inactivo. Tranquilo, aún podrás utilizar forYou (incluso puedes volver con este mismo usuario).";
-            }
-            ?>
-            Foto de perfil: <img src="<?php echo $row['imagen'];?>" width="100"><br><br>
-            
-            <!--Estructura de control en caso de que otro usuario fuera del que este logueado no pueda subir imagenes al perfil actualmente logueado-->
-            <?php
-                if($_GET["id"] == $_SESSION["id"]){ ?>
-
-            <form action="" method="POST" enctype="multipart/form-data">
-                <input type="file" name="imagen">
-                <input type="submit" value="Subir" name="subir">
-            </form>
-            <?php } ?>
-            
-            <!--Protocolo para subir imagenes y almacenarlas en carpetas de trabajo del servidor y la BD-->
-            <?php
-
-                if(isset($_POST["subir"])){
-                    $ruta = "fotodeperfil/";
-                    $fichero = $ruta.basename($_FILES["imagen"]["name"]);
-                    $rut = $ruta.$_GET["id"].".jpg";
-
-                    if(move_uploaded_file($_FILES["imagen"]["tmp_name"], $ruta.$_GET["id"].".jpg")) {
-                        
-                        require("config/config.php");
-
-                        $insertar = $conexion->query("UPDATE usuarios SET imagen = '$rut' WHERE id = '".$_GET['id']."'");
-                        header("Location: perfil.php?id=".$_GET["id"]."");
-                    };
+                    echo "<br><br>";
+                    echo "<article>Has cambiado el estado de tu cuenta a Inactivo. Tranquilo, aún podrás utilizar forYou (incluso puedes volver con este mismo usuario).</artcle>";
                 }
-
-            ?>
-            <br><br><br><br>
+                ?>
+                <br><br><br><br>
 
             <!--Muestra las publicaciones realizadas por el perfil logueado en su perfil-->
-            <?php
+            <?php /*
 
                 require("config/config.php");
 
@@ -97,9 +119,8 @@ if(!isset($_SESSION["usuario"])){
                         <div><a href="perfil.php?id=<?php echo $row['usuario']; ?>"><?php echo $rowUser["usuario"]; ?></a></div>
                     </div>
                     <br>
-
-            <?php } ?>
-       <?php } ?>
+                <?php } */?>
+    <?php } ?>
 
 </body>
 </html>

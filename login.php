@@ -4,7 +4,7 @@
 session_start();
 if(isset($_SESSION["usuario"])){
 
-    header("Location: foryou.php");
+    header("Location: index.php");
 }
 ?>
 
@@ -20,70 +20,116 @@ if(isset($_SESSION["usuario"])){
     <link rel="stylesheet" href="./styles/loginCode.css">
 </head>
 <body>
-    <div class="login-box">
-        <div class="container-logo">
-            <img src="./img/logo1.png" alt="logo" class="logo">
+    <div class="container-all">
+        <div class="login-box">
+            <div class="container-logo">
+                <img src="./img/logo1.png" alt="logo" class="logo">
+            </div>
+            <h2>Login</h2>
+            <form class="container-form" autocomplete="off" method="POST">
+                <div class="user-box">
+                    <input type="email" name="email" required="">
+                    <label>Email</label>
+                </div>
+                <div class="user-box">
+                    <input type="password" name="pass" required="">
+                    <label>Password</label>
+                </div>
+                <input type="submit" value="Login" name="login" class="btn">
+            </form>
         </div>
-        <h2>Login</h2>
-        <form class="container-form">
-        <div class="user-box">
-            <input type="text" name="user" required="">
-            <label>Username</label>
+        <hr>
+        <div class="login-box">
+            <div class="container-logo">
+                <img src="./img/logo1.png" alt="logo" class="logo">
+            </div>
+            <h2>Registro</h2>
+            <form class="container-form" autocomplete="off" method="POST">
+                <div class="user-box">
+                    <input type="email" name="email" required="">
+                    <label>Email</label>
+                </div>
+                <div class="user-box">
+                    <input type="text" name="user" required="">
+                    <label>Username</label>
+                </div>
+                <div class="user-box">
+                    <input type="password" name="pass" required="">
+                    <label>Password</label>
+                </div>
+              <input type="submit" value="Registrarse" name="reg" class="btn">
+            </form>
         </div>
-        <div class="user-box">
-            <input type="password" name="pass" required="">
-            <label>Password</label>
-        </div>
-        <a href="index.php" name="login" >
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            Login
-        </a>
-        <a href="register.php" name="register">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            Registro
-        </form>
-    </div>    
-</body>
-</html>
+    </div>
+
+    <!--Logica Registro-->
+    
+    <?php
+
+        if(isset($_POST["reg"])){
+
+            require("config/config.php");
+            $user = $_POST["user"];
+            $email = $_POST["email"];
+            $filtroEmail = filter_var($email, FILTER_SANITIZE_EMAIL);
+            $pass = $_POST["pass"]; 
+
+            $userPubli = $conexion->query("SELECT * FROM usuarios WHERE usuariopublico = '$user'");
+            $consulta = $conexion->query("SELECT * FROM usuarios WHERE usuario = '$user'");
+            $consultaEmail = $conexion->query("SELECT * FROM usuarios WHERE email = '$email'");
+            $contar = $consulta->num_rows;
+            $contarEmail = $consultaEmail->num_rows;
+            
+            if($contar > 0){
+
+                echo '<script>alert("Ya existe un usuario con ese nombre.")</script>';
+
+            } elseif($contarEmail > 0){
+
+                echo '<script>alert("Ya existe un correo con ese nombre.")</script>';
+
+            } else{
+
+                $insertar = $conexion->query("INSERT INTO usuarios (usuario, email, clave, fecha, usuariopublico) VALUES('$user', '$email', '$pass', now(), '$user')");
+    
+                if($insertar){
+                    echo '<script>alert("Te has registrado correctamente.")</script>';
+                }
+            }
+        }
+    ?>
+
+    <!--Logica Login-->
 
     <?php
 
-if(isset($_POST["login"])){
-    require ("config/config.php");
+        if(isset($_POST["login"])){
+            require ("config/config.php");
 
-    $user = $_POST["user"];
-    $pass = md5($_POST["pass"]);
+            $email = $_POST["email"];
+            $pass = $_POST["pass"];
 
-    $validar = $conexion->query("SELECT * FROM usuarios WHERE usuario = '$user' AND clave = '$pass'");
-    $status=$conexion->query("SELECT `estado` FROM usuarios WHERE `usuario` = '$user' AND  `clave` = '$pass'");
-    $contar = $validar->num_rows;
-    $dato = $validar->fetch_assoc();
+            $validar = $conexion->query("SELECT * FROM usuarios WHERE email = '$email' AND clave = '$pass'");
+            $status=$conexion->query("SELECT `estado` FROM usuarios WHERE `usuario` = '$email' AND  `clave` = '$pass'");
+            $contar = $validar->num_rows;
+            $dato = $validar->fetch_assoc();
 
-    
-    if($contar == 1)
-    
-    {
-        $_SESSION["usuario"] = $user;
-        $_SESSION["id"] = $dato["id"];
-        $_SESSION["estado"] = $dato["estado"];
-        //print_r( $dato["estado"]);
-        header("Location: foryou.php");
-    }
-    else
-    {
-     echo "El usuario no existe o los datos son incorrectos";
-    }
-}
+            
+            if($contar === 1) {
 
-?>
-</p>
-    </div>
-
+                $busquedaId = $conexion->query("SELECT id FROM usuarios WHERE id = '".$dato["id"]."'");
+                $id = implode("", $busquedaId->fetch_assoc());
+                $_SESSION["usuario"] = $email;
+                $_SESSION["id"] = $dato["id"];
+                $_SESSION["estado"] = $dato["estado"];
+                header("Location: index.php?id=$id");
+                //print_r($dato);
+            }
+            else
+            {
+                echo '<script>alert("El usuario no existe o los datos son incorrectos")</script>';
+            }
+        }
+    ?>
 </body>
 </html>
