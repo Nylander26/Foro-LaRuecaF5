@@ -15,7 +15,15 @@ if(!$_SESSION["usuario"]){
 </head>
 <body>
 
+<?php
 
+    session_start();
+
+    if(!$_SESSION["usuario"]){
+        header("Location: login.php");
+    }
+    include("config/top.php");
+?>
 <!--Cuadro de Texto para compartir publicaciones -->
 
 <?php $idTema= $_POST['newHilo'] ?? null; ?>
@@ -34,7 +42,7 @@ if(!$_SESSION["usuario"]){
     
     <?php
         $idUsuario=$_SESSION["id"];
-        
+        print_r ($idUsuario);
         
    if(isset($_POST["share"])){
    

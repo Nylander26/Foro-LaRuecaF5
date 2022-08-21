@@ -53,7 +53,7 @@ if(!isset($_SESSION["usuario"])){
             
                     <form action="" method="POST" enctype="multipart/form-data">
                         <div class="custom-input-file">
-                            <input type="file" name="imagen" class="btn">
+                            <input type="file" name="imagen">
                             <input type="submit" value="Subir" name="subir" class="btn">
                         </div>
                     </form>
@@ -75,7 +75,13 @@ if(!isset($_SESSION["usuario"])){
                         }
                     ?>
                 <?php } ?>
-                
+                <br>
+                <br>
+                <article>
+                    <form action="update.php?id=<?php echo $_SESSION["id"]?>" method="POST">
+                        <input type="submit" value="Modificar Perfil" class="btn">
+                    </form>
+                </article>
                 <br>
                 <br>
                 <div class="desactivar">

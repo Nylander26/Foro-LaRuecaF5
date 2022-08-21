@@ -110,7 +110,7 @@ if(isset($_SESSION["usuario"])){
             $pass = $_POST["pass"];
 
             $validar = $conexion->query("SELECT * FROM usuarios WHERE email = '$email' AND clave = '$pass'");
-            $status=$conexion->query("SELECT `estado` FROM usuarios WHERE `usuario` = '$email' AND  `clave` = '$pass'");
+            $status = $conexion->query("SELECT `estado` FROM usuarios WHERE `usuario` = '$email' AND  `clave` = '$pass'");
             $contar = $validar->num_rows;
             $dato = $validar->fetch_assoc();
 
