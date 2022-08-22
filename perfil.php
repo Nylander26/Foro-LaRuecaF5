@@ -72,12 +72,9 @@ if(!isset($_SESSION["usuario"])){
                                 $insertar = $conexion->query("UPDATE usuarios SET imagen = '$rut' WHERE id = '".$_GET['id']."'");
                                 header("Location: perfil.php?id=".$_GET["id"]."");
                             };
-                        }
+                        }  
                     ?>
-                <?php } ?>
-                <br>
-                <br>
-                <article>
+                    <article>
                     <form action="update.php?id=<?php echo $_SESSION["id"]?>" method="POST">
                         <input type="submit" value="Modificar Perfil" class="btn">
                     </form>
@@ -91,10 +88,6 @@ if(!isset($_SESSION["usuario"])){
                         <input type="hidden" name="id" value= "<?php echo $id ?>"><br>
                     </form>
                 </div>
-        <?php 
-
-        $desactivar = $conexion->query("UPDATE usuarios SET estado = 'inactivo' WHERE  id = $id "); ?>
-
             <?php if(isset($_POST["desactivar"])){ ?>
                 <style type="text/css">
                     .desactivar{
@@ -102,10 +95,15 @@ if(!isset($_SESSION["usuario"])){
                     }
                 </style>
             <?php 
+                    $desactivar = $conexion->query("UPDATE usuarios SET estado = 'inactivo' WHERE  id = $id "); 
                     echo "<br><br>";
                     echo "<article>Has cambiado el estado de tu cuenta a Inactivo. Tranquilo, aún podrás utilizar forYou (incluso puedes volver con este mismo usuario).</artcle>";
                 }
                 ?>
+                <?php } ?>
+                <br>
+                <br>
+                
                 <br><br><br><br>
 
             <!--Muestra las publicaciones realizadas por el perfil logueado en su perfil-->
