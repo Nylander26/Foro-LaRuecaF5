@@ -1,11 +1,18 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 html {
     height: 100%;
   }
     body {
-    margin:0;
-    padding:0;
-    font-family: sans-serif;
-    background: linear-gradient(#83c7ad, #339565);
+        margin:0;
+        padding:0;
+        font-family: sans-serif;
+        background: linear-gradient(#83c7ad, #339565);
+        background-attachment: fixed;
     }
 
     hr{
@@ -149,6 +156,11 @@ html {
 
     hr{
         display: none;
+    }
+
+    .button{
+        border-radius: 12px;
+        width: 20%;
     }
     
   }

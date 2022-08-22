@@ -1,0 +1,73 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-attachment: fixed;
+}
+
+.divTop
+{
+    width: 15%;
+    float: left;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-right: 10px;
+}
+
+.logoTop
+{
+    width: 100%;
+}
+
+.divTema
+{
+    width: 80%;
+    border-radius: 20px;
+    background: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center ;  
+    align-content: center;
+    align-items: center;
+    justify-items: center;
+    margin: 0 auto;
+    overflow: auto;
+    margin-top: 10%;
+}
+
+.divTema > h3
+{
+    text-align-last: center;
+    padding: 5px 5px 5px 5px;
+    margin: 0px;
+}
+
+.divTema > h5
+{
+    padding: 5px 5px 5px 5px;
+    margin: 5px;
+}
+.divTema > p
+{
+    padding: 5px 5px 5px 5px;
+    margin: 5px;
+}
+
+
+.divHilo
+{
+    background-color: beige;
+    width: 90%;
+    border-radius: 20px;
+    text-align: center;
+    line-height: 1.7em;
+}
+
+.divComentario
+{
+    background-color: grey;
+    width: 90%;
+    border-radius: 20px;
+    text-align: center;
+}

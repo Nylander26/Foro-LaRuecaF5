@@ -14,6 +14,7 @@ if(!$_SESSION["usuario"]){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/index.css">
+    <link rel="stylesheet" href="./styles/temas.css">
     <title>Inicio</title>
 </head>
 <body>
@@ -84,11 +85,12 @@ if(!$_SESSION["usuario"]){
             <h3> <?php echo $row["titulo"]; ?> </h3>
             <h5><?php echo $row["descripcion"]; ?> </h5>
             <p>  <?php echo $row["contenido"]; ?> </p>
-                
-            <form action="" method="POST">
-                <input type="hidden" name="idTema" value="<?php echo $row["id"]; ?>">
-                <input type="submit" class= "inputTema" value="Ver hilos de <?php echo $row["titulo"]; ?>">
-            </form>
+            
+                <form action="" method="POST" class="container-form">
+                    <input type="hidden" name="idTema" value="<?php echo $row["id"]; ?>">
+                    <input type="submit" value="Ver hilos de <?php echo $row["titulo"]; ?>" class="button">
+                </form>
+
         <?php 
             if(isset($_POST["idTema"])) {
                 include ('temas.php');

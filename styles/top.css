@@ -31,3 +31,10 @@
                 0 0 100px #03e9f4;
     border-radius: 40px;
 }
+
+@media screen and (max-width: 450px){
+    .container-top{
+        display: flex;
+        flex-direction: column;
+    }
+}

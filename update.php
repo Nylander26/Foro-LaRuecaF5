@@ -45,20 +45,20 @@ if(!isset($_SESSION["usuario"])){
                     <h2>Modificar Perfil</h2>
                     <form action="" method="post" class="container-form" autocomplete="off">
                         <div class="user-box">
+                            <input type="text" name="nameUpdate" value="<?php echo $row['nombrereal'] ?>"><br>
                             <label>Nombre y Apellido:</label><br>
-                                <input type="text" name="nameUpdate" value="<?php echo $row['nombrereal'] ?>"><br>
                         </div>
                         <div class="user-box">
+                            <input type="text" name="userUpdate" value="<?php echo $row['usuario'] ?>"><br>
                             <label>Nombre de Usuario:</label><br>
-                                <input type="text" name="userUpdate" value="<?php echo $row['usuario'] ?>"><br>
                         </div>
                         <div class="user-box">
+                            <input type="password" name="passUpdate" value="<?php echo $row['clave'] ?>"><br>
                             <label>Contraseña:</label><br>
-                                <input type="password" name="passUpdate" value="<?php echo $row['clave'] ?>"><br>
                         </div>
                         <div class="user-box">
+                            <input type="email" name="emailUpdate" value="<?php echo $row['email'] ?>"><br>
                             <label>Email:</label><br>
-                                <input type="email" name="emailUpdate" value="<?php echo $row['email'] ?>"><br>
                         </div>
                         <input type="submit" value="Modificar" name="update" class="btn">
                     </form>
