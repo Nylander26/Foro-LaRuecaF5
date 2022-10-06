@@ -20,6 +20,7 @@ if(!isset($_SESSION["usuario"])){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modificar Perfil</title>
+    <link rel="stylesheet" href="./styles/update.css">
 </head>
 <body>
     
@@ -36,52 +37,69 @@ if(!isset($_SESSION["usuario"])){
         <?php if($_GET["id"] == $_SESSION["id"]){ ?>
             <?php require("config/config.php"); ?>
 
-            <form action="" method="post">
-                Nombre y Apellido:<br>
-                    <input type="text" name="nameUpdate" value="<?php echo $row['nombrereal'] ?>"><br>
-                Nombre de Usuario:<br>
-                    <input type="text" name="userUpdate" value="<?php echo $row['usuario'] ?>"><br>
-                Contraseña:<br>
-                    <input type="password" name="passUpdate" value="<?php echo $row['clave'] ?>"><br>
-                Email:<br>
-                    <input type="email" name="emailUpdate" value="<?php echo $row['email'] ?>"><br>
-                <input type="submit" value="Modificar" name="update">
-            </form>
-            <?php } ?>
+            <div class="container-all">
+                <div class="login-box">
+                    <div class="container-logo">
+                        <img src="./img/logo1.png" alt="logo" class="logo">
+                    </div>
+                    <h2>Modificar Perfil</h2>
+                    <form action="" method="post" class="container-form" autocomplete="off">
+                        <div class="user-box">
+                            <input type="text" name="nameUpdate" value="<?php echo $row['nombrereal'] ?>"><br>
+                            <label>Nombre y Apellido:</label><br>
+                        </div>
+                        <div class="user-box">
+                            <input type="text" name="userUpdate" value="<?php echo $row['usuario'] ?>"><br>
+                            <label>Nombre de Usuario:</label><br>
+                        </div>
+                        <div class="user-box">
+                            <input type="password" name="passUpdate" value="<?php echo $row['clave'] ?>"><br>
+                            <label>Contraseña:</label><br>
+                        </div>
+                        <div class="user-box">
+                            <input type="email" name="emailUpdate" value="<?php echo $row['email'] ?>"><br>
+                            <label>Email:</label><br>
+                        </div>
+                        <input type="submit" value="Modificar" name="update" class="btn">
+                    </form>
+                    <?php } ?>
 
-            <?php
-                $nameUpdate = $_POST["nameUpdate"] ?? null;
-                $userUpdate = $_POST["userUpdate"] ?? null;
-                $passUpdate = $_POST["passUpdate"] ?? null;
-                $emailUpdate = $_POST["emailUpdate"] ?? null;
-                $filtroEmailUpdate = filter_var($emailUpdate, FILTER_SANITIZE_EMAIL);
-                require ("config/config.php");
+                    <?php
+                        $nameUpdate = $_POST["nameUpdate"] ?? null;
+                        $userUpdate = $_POST["userUpdate"] ?? null;
+                        $passUpdate = $_POST["passUpdate"] ?? null;
+                        $emailUpdate = $_POST["emailUpdate"] ?? null;
+                        $filtroEmailUpdate = filter_var($emailUpdate, FILTER_SANITIZE_EMAIL);
+                        require ("config/config.php");
 
-                if(isset($_POST["update"])){
+                        if(isset($_POST["update"])){
 
-                    if(isset($nameUpdate)){
-                        $rutaNombre = $conexion->query("UPDATE usuarios SET nombrereal = '".$nameUpdate."' WHERE id = '".$_GET['id']."'");
-                    } 
+                            if(isset($nameUpdate)){
+                                $rutaNombre = $conexion->query("UPDATE usuarios SET nombrereal = '".$nameUpdate."' WHERE id = '".$_GET['id']."'");
+                            } 
 
-                    if(isset($userUpdate)){
-                        $rutaUsuario = $conexion->query("UPDATE usuarios SET usuario = '".$userUpdate."' WHERE id = '".$_GET['id']."'");
-                        unset($_SESSION["usuario"]);
-                        $_SESSION["usuario"] = $userUpdate;
-                    } 
-                    
-                    if(isset($passUpdate)){
-                        $rutaPass = $conexion->query("UPDATE usuarios SET clave = '".$passUpdate."'WHERE id = '".$_GET['id']."'");
-                    } 
-                    
-                    if(isset($emailUpdate)){
-                        $rutaEmail = $conexion->query("UPDATE usuarios SET email = '".$filtroEmailUpdate."' WHERE id = '".$_GET['id']."'");
-                    }
-                    echo "Los cambios se han realizado con exito!";
-                    //header("Location: update.php?id=".$_GET["id"]."");
-                }
-                //print_r($_SESSION);
-            ?>
-            <?php } ?>
-        <?php } ?>
+                            if(isset($userUpdate)){
+                                $rutaUsuario = $conexion->query("UPDATE usuarios SET usuario = '".$userUpdate."' WHERE id = '".$_GET['id']."'");
+                                unset($_SESSION["usuario"]);
+                                $_SESSION["usuario"] = $userUpdate;
+                            } 
+                            
+                            if(isset($passUpdate)){
+                                $rutaPass = $conexion->query("UPDATE usuarios SET clave = '".$passUpdate."'WHERE id = '".$_GET['id']."'");
+                            } 
+                            
+                            if(isset($emailUpdate)){
+                                $rutaEmail = $conexion->query("UPDATE usuarios SET email = '".$filtroEmailUpdate."' WHERE id = '".$_GET['id']."'");
+                            }
+                            echo "Los cambios se han realizado con exito!";
+                            //header("Location: update.php?id=".$_GET["id"]."");
+                        }
+                        //print_r($_SESSION);
+                    ?>
+                    <?php } ?>
+                <?php } ?>
+                </div>
+            </div>
+        </div>
 </body>
 </html>
