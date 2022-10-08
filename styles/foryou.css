@@ -1,0 +1,96 @@
+body
+{
+    background-color:#2EC49D;
+    display: flex;
+    flex-direction: column;
+    justify-content: center ;  
+    align-content: center;
+    align-items: center;
+    justify-items: center;
+    width: 95%;
+    margin:20px;
+}
+
+.logo
+{
+    width: 20%;
+}
+
+
+.top
+{
+    width: 100%; 
+    float: left; 
+    margin-bottom: 30px;
+    display: flex;
+}
+
+.divTop
+{
+    width: 15%;
+    float: left;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-right: 10px;
+}
+
+.logoTop
+{
+    width: 100%;
+}
+
+.divTema
+{
+    width: 80%;
+    border: 1px;
+    border-color: white;
+    border-radius: 20px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center ;  
+    align-content: center;
+    align-items: center;
+    justify-items: center;
+    
+}
+
+.divTema > h3
+{
+    text-align-last: center;
+    padding: 5px 5px 5px 5px;
+    margin: 0px;
+}
+
+.divTema > h5
+{
+    padding: 5px 5px 5px 5px;
+    margin: 5px;
+}
+.divTema > p
+{
+    padding: 5px 5px 5px 5px;
+    margin: 5px;
+}
+
+.inputTema
+{
+    float: right;
+    padding: 5px 5px 5px 5px;
+    margin: 5px;
+}
+
+.divHilo
+{
+    background-color: beige;
+    width: 90%;
+    border-radius: 20px;
+}
+
+.divComentario
+{
+    background-color: grey;
+    width: 90%;
+    border-radius: 20px;
+}
